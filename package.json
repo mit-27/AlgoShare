@@ -9,9 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/react": "^1.8.6",
+    "@codemirror/lang-cpp": "^0.19.1",
+    "@codemirror/lang-java": "^0.19.1",
+    "@codemirror/lang-javascript": "^0.19.7",
+    "@codemirror/lang-python": "^0.19.4",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@uiw/react-codemirror": "^4.5.1",
+    "framer-motion": "^6",
     "next": "12.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.28.1",
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
     "eslint": "8.11.0",
