@@ -1,13 +1,15 @@
 import {useColorMode, Box, Text, Stack, CheckboxGroup, Checkbox, Select} from '@chakra-ui/react';
 import React,{useState} from 'react'
+import {useSearch} from '../utils/search'
 
 const Filters = () => {
-    const [questionsType, setquestionsType] = useState(['Leetcode', 'HackerRank', 'CodeForce', 'CodeChef','InterviewBit']);
+    // const [questionsType, setquestionsType] = useState(['Leetcode', 'HackerRank', 'CodeForce', 'CodeChef','InterviewBit']);
+    const {platformFilters,onFilterPlatform} = useSearch()
 
 
-    const onFiterQuestions = (newValues) => {
-        setquestionsType(newValues);
-    };
+    // const onFiterQuestions = (newValues) => {
+    //     setquestionsType(newValues);
+    // };
 
     return (
     
@@ -17,16 +19,16 @@ const Filters = () => {
                 {'Filter Platform specific Questions'}
             </Text>
             <CheckboxGroup
-                onChange={onFiterQuestions}
+                onChange={onFilterPlatform}
                 spacing={2}
                 variantColor="teal"
-                value={questionsType}
+                value={platformFilters}
             >
-                <Checkbox value="Leetcode">Leetcode</Checkbox>
-                <Checkbox value="HackerRank">HackerRank</Checkbox>
-                <Checkbox value="CodeForce">CodeForce</Checkbox>
-                <Checkbox value="CodeChef">CodeChef</Checkbox>
-                <Checkbox value="InterviewBit">InterviewBit</Checkbox>
+                <Checkbox value="LEETCODE">Leetcode</Checkbox>
+                <Checkbox value="HACKERRANK">HackerRank</Checkbox>
+                <Checkbox value="CODEFORCE">CodeForce</Checkbox>
+                <Checkbox value="CODECHEF">CodeChef</Checkbox>
+                <Checkbox value="INTERVIEWBIT">InterviewBit</Checkbox>
             </CheckboxGroup>
         </Stack>
     </Box>  

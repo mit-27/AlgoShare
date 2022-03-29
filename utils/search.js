@@ -14,7 +14,7 @@ export const useSearch = () => {
 function useProvideSearch() {
 
     const [search, setSearch] = useState("");
-    const [platformFilters, setPlatformFilters] = useState(['Leetcode', 'HackerRank', 'CodeForce', 'CodeChef', 'InterviewBit']);
+    const [platformFilters, setPlatformFilters] = useState(['LEETCODE', 'HACKERRANK', 'CODEFORCE', 'CODECHEF', 'INTERVIEWBIT']);
 
 
 

@@ -4,19 +4,21 @@ import Layout from '../../components/Layout'
 import QuestionCard from '../../components/QuestionCard';
 import EmptySearch from '../../components/EmptySearch';
 import { withApollo } from '../../graphql/apollo'
-import { GET_CODE_QUESTIONS, GET_CODE_QUESTIONS_MUTATION } from '../../graphql/queries'
+import { GET_CODE_QUESTIONS, GET_CODE_QUESTIONS_SUBSCRIPTION } from '../../graphql/queries'
 import { useSubscription } from '@apollo/client'
 import { useSearch } from '../../utils/search';
 
 const problems = () => {
 
-    const { data, loading, error } = useSubscription(GET_CODE_QUESTIONS_MUTATION)
-    const { search } = useSearch();
+    const { data, loading, error } = useSubscription(GET_CODE_QUESTIONS_SUBSCRIPTION)
+    const { search, platformFilters } = useSearch();
 
     const allQuestions = data ? data.code_questions : []
     const matchesSearch = (question) => question.question.toLowerCase().includes(search.toLowerCase());
-    // const matchesAlcoholType = (deal) => alcoholTypeFilters.includes(deal.alcoholType);
-    const filteredQuestions = allQuestions.filter(matchesSearch)
+    const matchesPlatform = (question) => question.platforms.some(p => platformFilters.includes(p));
+
+    // const matchesPlatform = (question) => platformFilters.includes(question.platforms[0]);
+    const filteredQuestions = allQuestions.filter(matchesSearch).filter(matchesPlatform)
     // .filter(matchesAlcoholType);
 
     if (error) { console.log("Error MSg : ", error.message) }

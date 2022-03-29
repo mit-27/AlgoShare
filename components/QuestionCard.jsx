@@ -12,10 +12,12 @@ const badgeColors = {
 
 const QuestionCard = ({question,platforms,keyItem,answersCount,userName}) => {
 
+    console.log(platforms[0])
+
     const router = useRouter()
 
     const onQuestion = () => {
-        router.push({pathname:'/problems/[id]',query:{id:322332}})
+        router.push({pathname:'/problems/[id]',query:{id:keyItem}})
     }
 
 

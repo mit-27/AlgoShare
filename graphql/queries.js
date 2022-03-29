@@ -20,7 +20,30 @@ query MyQuery {
 }
 `;
 
-export const GET_CODE_QUESTIONS_MUTATION = gql`
+export const GET_ONE_CODE_QUESTION_SUBSCRIPTION = gql`
+subscription Mysubscription($questionID:uuid!) {
+  code_questions_by_pk(id: $questionID) {
+    id
+    platforms
+    question
+    questionURL
+    code_answers {
+      codeAnswer
+      id
+      Votes {
+        id
+        upvoted
+        userID
+      }
+    }
+    user {
+      name
+    }
+  }
+}
+`;
+
+export const GET_CODE_QUESTIONS_SUBSCRIPTION = gql`
 subscription MySubscription {
   code_questions(order_by: {addedTime: desc}) {
     id
