@@ -1,4 +1,5 @@
 import { ChakraProvider, ColorModeProvider, CSSReset, ThemeProvider, extendTheme } from '@chakra-ui/react'
+import { UserProvider } from '@auth0/nextjs-auth0';
 import '../styles/Home.css'
 
 
@@ -11,9 +12,11 @@ const Mytheme = extendTheme({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider theme={Mytheme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <UserProvider>
+      <ChakraProvider theme={Mytheme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </UserProvider>
   )
 }
 

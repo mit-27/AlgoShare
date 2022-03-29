@@ -2,13 +2,21 @@ import React from 'react'
 import {ChevronDownIcon,ChevronUpIcon} from '@chakra-ui/icons'
 import { useState } from 'react'
 import {Box,Stack,IconButton} from '@chakra-ui/react'
+import { useUser } from '@auth0/nextjs-auth0'
+import { withAuthModal } from './AuthModal'
 
-const Voter = () => {
+const Voter = ({openAuthModal}) => {
 
     const [upvoted,setUpvote] = useState(false)
     const [downvoted,setDownvote] = useState(false)
+    const {user} = useUser()
 
     const onVote = (vote) => {
+
+      if(!user) {
+        return openAuthModal()
+      }
+
       setUpvote(vote)
       setDownvote(!vote)
     }
@@ -44,4 +52,4 @@ const Voter = () => {
     )
 }
 
-export default Voter
+export default withAuthModal(Voter)

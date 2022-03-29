@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import NavDefault from '../../components/NavDefault'
-import { Box, Heading, Flex, Badge, VStack, Stack, Center, useToast, Button, Select, FormLabel } from '@chakra-ui/react'
+import { Box, Heading, Flex, Badge, VStack, Stack, Center, useToast, Button, Select, FormLabel, Text, Link } from '@chakra-ui/react'
 import { useState } from 'react'
 import CodeCard from '../../components/CodeCard'
 import CodeMirror from '@uiw/react-codemirror';
@@ -10,17 +10,30 @@ import { python } from '@codemirror/lang-python'
 import { cpp } from '@codemirror/lang-cpp'
 import { java } from '@codemirror/lang-java'
 import { javascript } from '@codemirror/lang-javascript'
+import { useUser } from '@auth0/nextjs-auth0'
+import { withAuthModal } from '../../components/AuthModal'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const languagesObjects = { 'java': java(), 'python': python() }
 
-const ProblemAnswers = () => {
+const ProblemAnswers = ({ openAuthModal }) => {
     const router = useRouter()
     const toast = useToast()
     const [platformName, setp] = useState('Leetcode')
     const [code, setCode] = useState("")
     const [language, setLanguage] = useState("java")
+    const { user } = useUser()
 
     const onAdd = () => {
+
+        if (!user) {
+            return openAuthModal()
+        }
+
+
+
+
+
         if (code === "" || language === "") {
             toast({
                 title: 'Select language',
@@ -40,7 +53,12 @@ const ProblemAnswers = () => {
                 <Box mt={4}>
                     <Center>
                         <Stack spacing={3} px={5} width="full" maxWidth="1280px" alignSelf='center' borderBottomWidth='medium' pt={20} pb={5}>
-                            <Heading color='teal.200'>Q : Longest Substring Without Repeating Characters</Heading>
+
+                            <Heading>
+
+                                <Link size='xl' href="https://www.hackerrank.com/domains/data-structures" isExternal color='teal.200'>Q : Longest Substring Without Repeating Characters <ExternalLinkIcon mx='2px' /></Link>
+
+                            </Heading>
                             <Flex align='baseline' justify='flex-start'>
                                 <Badge fontSize='md' variant='subtle'>Answers : 30</Badge>
                             </Flex>
@@ -53,7 +71,7 @@ const ProblemAnswers = () => {
                             </Flex>
 
                             <Flex align='baseline' justify='flex-start'>
-                                <Badge cursor='default' fontSize='sm' variant='subtle'>Asked by Mit Suthar</Badge>
+                                <Text color='gray.300'> - Mit Suthar</Text>
                             </Flex>
                         </Stack>
                     </Center>
@@ -106,4 +124,4 @@ const ProblemAnswers = () => {
     )
 }
 
-export default ProblemAnswers
+export default withAuthModal(ProblemAnswers)

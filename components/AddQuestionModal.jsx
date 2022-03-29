@@ -19,14 +19,18 @@ import {
     Stack
 } from '@chakra-ui/react';
 import {useForm} from 'react-hook-form';
+import {withAuthModal} from './AuthModal'
+import {useUser} from '@auth0/nextjs-auth0'
 
 
-const AddQuestionModal = () => {
+const AddQuestionModal = ({openAuthModal}) => {
     const initialRef = useRef();
     const {isOpen, onOpen, onClose} = useDisclosure();
     const {handleSubmit,formState:{errors}, register,reset} = useForm();
 
     const [questionsType, setquestionsType] = useState([]);
+
+    const {user} = useUser()
 
 
     const onFiterQuestions = (newValues) => {
@@ -37,8 +41,15 @@ const AddQuestionModal = () => {
         // if (!userId) {
         //     return openAuthModal();
         // }
-
+        if(!user) {
+            console.log("")
+            return openAuthModal()
+        }
+        
         onOpen();
+        
+
+        
     };
 
     const onCloseModal = () => {
@@ -143,4 +154,4 @@ const AddQuestionModal = () => {
   
 }
 
-export default AddQuestionModal
+export default withAuthModal(AddQuestionModal)

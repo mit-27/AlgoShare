@@ -2,7 +2,14 @@ import { Box, Flex, Heading, Text, Button, Container,Center } from '@chakra-ui/r
 import Image from 'next/image'
 import mainImage from '../utils/images/main_3_img.png'
 import Link from 'next/link'
+import {useUser} from '@auth0/nextjs-auth0'
+
+
 const Home = () => {
+
+  const {user} = useUser()
+
+
   return (
     <Box as="section" pt={20} pb={24}>
             {/* <Container> */}
@@ -19,7 +26,7 @@ const Home = () => {
                
 
                 <Box mt="6">
-                  <Link href="/" passHref>
+                  <Link href={user? "/problems" : "/api/auth/login"} passHref >
                       <Button size="lg" as="a" colorScheme="teal">
                           Let's Get Started
                       </Button>

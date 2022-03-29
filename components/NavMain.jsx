@@ -4,9 +4,12 @@ import {HamburgerIcon} from '@chakra-ui/icons'
 import {SearchIcon} from '@chakra-ui/icons'
 import {useState, useEffect, useRef} from 'react';
 import SideNav from './SideNav';
+import {useUser} from '@auth0/nextjs-auth0'
+
 
 const useKeyPress = (targetKey) => {
     const [keyPressed, setKeyPressed] = useState(false);
+    
 
     const downHandler = ({key}) => {
         if (key === targetKey) {
@@ -41,6 +44,7 @@ const NavMain = () => {
     const inputRef = useRef();
     const slashPress = useKeyPress('/');
     const {isOpen, onToggle, onClose} = useDisclosure();
+    const {user} = useUser()
 
     if (slashPress) {
         inputRef.current.focus();
@@ -87,15 +91,18 @@ const NavMain = () => {
                             bg="gray.700"
                         />
                 </InputGroup>
+
                 <Flex align="center" display={['none','block']} >
-                    <Button as="a" variant='outline' colorScheme='teal'>{'Login'}</Button>
+                    <Link href={user? "/api/auth/logout" : "/api/auth/login"}><Button as="a" variant='outline' colorScheme='teal'>{user ? "Logout" : "Login"}</Button></Link>
                 </Flex>
+
+
                 <Flex align='center' display={['block','none']}>
                     <IconButton
                         aria-label="Navigation Menu"
                         fontSize="20px"
                         variant="ghost"
-                        display={{sm: 'inline-flex', md: 'none'}}
+                        display={{sm: 'inline-flex', md: 'inline-flex'}}
                         color="gray.500"
                         icon={<HamburgerIcon/>}
                         onClick={onToggle}
@@ -105,7 +112,7 @@ const NavMain = () => {
                         <DrawerContent>
                             <DrawerCloseButton />
                             <DrawerBody p={0}>
-                                <SideNav contentHeight="100vh" />
+                                <SideNav closedrawer={onClose}  />
                             </DrawerBody>
                         </DrawerContent>
                     </Drawer>

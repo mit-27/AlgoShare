@@ -1,6 +1,15 @@
 import {useColorMode, Box, Badge, Text, Flex, Stack} from '@chakra-ui/react';
 import {useRouter} from 'next/router'
 
+const badgeColors = {
+    LEETCODE: 'yellow',
+    HACKERRANK: 'blue',
+    CODEFORCE: 'red',
+    CODECHEF: 'orange',
+    INTERVIEWBIT:'teal'
+};
+
+
 const QuestionCard = ({question,plaformName}) => {
 
     const router = useRouter()
@@ -31,14 +40,14 @@ const QuestionCard = ({question,plaformName}) => {
                         <Badge fontSize='md' variant='subtle'>Answers : 30</Badge>
                     </Flex>
 
-                    <Flex align="left" justify='flex-start'  py={2} >
-                        <Badge cursor='default' colorScheme='teal' mr={1}>{plaformName}</Badge>
-                        <Badge cursor='default' colorScheme='green' mr={1}>{plaformName}</Badge>
-                        <Badge cursor='default' colorScheme='purple' mr={1}>{plaformName}</Badge>
+                    <Flex wrap='wrap' align="left" justify='flex-start'  py={2} >
+                        <Badge cursor='default' colorScheme={badgeColors[plaformName]} m={1}>{plaformName}</Badge>
+                        <Badge cursor='default' colorScheme={badgeColors[plaformName]} m={1}>{plaformName}</Badge>
+                        <Badge cursor='default' colorScheme={badgeColors[plaformName]} m={1}>{plaformName}</Badge>
                     </Flex>
 
-                    <Flex align='baseline' justify='flex-end'>
-                        <Badge cursor='default' fontSize='sm' variant='subtle'> - Mit Suthar</Badge>
+                    <Flex align='baseline' justify='flex-start'>
+                        <Text color='gray.300'> - Mit Suthar</Text>
                     </Flex>
                 </Stack>
             </Flex>

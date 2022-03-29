@@ -16,7 +16,7 @@ const problems = () => {
                 </Flex>
             ) : (
                 <>
-                    <QuestionCard plaformName="Leetcode" question="Longest Substring Without Repeating Characters" />
+                    <QuestionCard plaformName="HACKERRANK" question="Longest Substring Without Repeating Characters" />
                     {/* {filteredDeals.length ? (
                         filteredDeals.map((deal) => <DealCard key={deal.id} userId={userId} {...deal} />)
                     ) : (

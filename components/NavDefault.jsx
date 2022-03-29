@@ -1,8 +1,15 @@
 import {Box, Flex, Heading, Text, Button,IconButton,Menu,MenuList,MenuItem,MenuButton} from '@chakra-ui/react';
 import Link from 'next/link'
 import {HamburgerIcon} from '@chakra-ui/icons'
+import {useUser} from '@auth0/nextjs-auth0'
 
 const NavDefault = () => {
+
+    const {user} = useUser()
+
+
+
+
   return (
     <Box
     pos='fixed'
@@ -24,9 +31,11 @@ const NavDefault = () => {
                     <Heading  size='md' color='skyblue'>AlgoShare</Heading>
                 </Box>
                 <Flex align="center" display={['none','block']} >
-                    <Button  variant="ghost" mr={2}>
-                        {'Sign In'}
-                    </Button>
+                    <Link href={user? "/api/auth/logout" : "/api/auth/login"} passHref > 
+                        <Button as='a'  variant="ghost" mr={2}>
+                            {user? 'Logout' : 'Login'}
+                        </Button>
+                    </Link>
                     <Link href="/problems" passHref>
                         <Button as="a" >{'Problems'}</Button>
                     </Link>
@@ -40,12 +49,16 @@ const NavDefault = () => {
                             variant='outline'
                         />
                         <MenuList>
-                            <MenuItem  command='⌘T'>
-                            Sign in
-                            </MenuItem>
-                            <MenuItem  command='⌘N'>
-                            Dashboard
-                            </MenuItem>
+                            <Link href={user? "/api/auth/logout" : "/api/auth/login"} passHref>
+                                <MenuItem as='a'  >
+                                {user? 'Logout' : 'Login'}
+                                </MenuItem>
+                            </Link>
+                            <Link href="/problems" passHref>
+                                <MenuItem as='a'  >
+                                Problems
+                                </MenuItem>
+                            </Link>
                             
                         </MenuList>
                     </Menu>
