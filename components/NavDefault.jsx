@@ -32,7 +32,7 @@ const NavDefault = () => {
                 </Box>
                 <Flex align="center" display={['none','block']} >
                     <Link href={user? "/api/auth/logout" : "/api/auth/login"} passHref > 
-                        <Button as='a'  variant="ghost" mr={2}>
+                        <Button as='a' cursor='pointer'  variant="ghost" mr={2}>
                             {user? 'Logout' : 'Login'}
                         </Button>
                     </Link>

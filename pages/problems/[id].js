@@ -13,6 +13,8 @@ import { javascript } from '@codemirror/lang-javascript'
 import { useUser } from '@auth0/nextjs-auth0'
 import { withAuthModal } from '../../components/AuthModal'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { withApollo } from '../../graphql/apollo'
+
 
 const languagesObjects = { 'java': java(), 'python': python() }
 
@@ -124,4 +126,4 @@ const ProblemAnswers = ({ openAuthModal }) => {
     )
 }
 
-export default withAuthModal(ProblemAnswers)
+export default withApollo(withAuthModal(ProblemAnswers), { ssr: false })

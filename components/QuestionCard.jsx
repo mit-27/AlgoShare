@@ -10,7 +10,7 @@ const badgeColors = {
 };
 
 
-const QuestionCard = ({question,plaformName}) => {
+const QuestionCard = ({question,platforms,keyItem,answersCount,userName}) => {
 
     const router = useRouter()
 
@@ -26,9 +26,13 @@ const QuestionCard = ({question,plaformName}) => {
             p={1}
             mb={2}
             backgroundColor="gray.800"
+            key={keyItem}
         >
             <Flex>
                 <Stack ml={3} mt={2} mb={2} w="100%" pr={4}>
+                    <Flex wrap='wrap' align="left" justify='flex-start'  py={2} >
+                        {platforms.map((platform) => <Badge key={platform} cursor='default' colorScheme={badgeColors[platform]} mx={1} mt={1}>{platform}</Badge>)}
+                    </Flex>
                     <Flex align="center" justify="space-between">
                         <Text fontSize="2xl" _hover={{color:'skyblue'}} onClick={() => onQuestion()} cursor='pointer' fontWeight="semibold" lineHeight="short">
                             {question}
@@ -37,17 +41,13 @@ const QuestionCard = ({question,plaformName}) => {
                     </Flex>
 
                     <Flex align='baseline' justify='flex-start'>
-                        <Badge fontSize='md' variant='subtle'>Answers : 30</Badge>
+                        <Badge fontSize='sm' variant='subtle'>Answers : {answersCount}</Badge>
                     </Flex>
 
-                    <Flex wrap='wrap' align="left" justify='flex-start'  py={2} >
-                        <Badge cursor='default' colorScheme={badgeColors[plaformName]} m={1}>{plaformName}</Badge>
-                        <Badge cursor='default' colorScheme={badgeColors[plaformName]} m={1}>{plaformName}</Badge>
-                        <Badge cursor='default' colorScheme={badgeColors[plaformName]} m={1}>{plaformName}</Badge>
-                    </Flex>
+                    
 
                     <Flex align='baseline' justify='flex-start'>
-                        <Text color='gray.300'> - Mit Suthar</Text>
+                        <Text color='gray.300'> - {userName}</Text>
                     </Flex>
                 </Stack>
             </Flex>

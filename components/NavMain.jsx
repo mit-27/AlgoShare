@@ -38,9 +38,9 @@ const useKeyPress = (targetKey) => {
 
 
 
-const NavMain = () => {
+const NavMain = (props) => {
     
-    const [search,SetSearch] = useState("")
+    const {search,onSearch} = props
     const inputRef = useRef();
     const slashPress = useKeyPress('/');
     const {isOpen, onToggle, onClose} = useDisclosure();
@@ -50,13 +50,13 @@ const NavMain = () => {
         inputRef.current.focus();
     }
 
-    const onSearch = (e) => {
-        e.preventDefault();
-        const searchValue = e.target.value;
-        const valueWithoutSlash = searchValue.replace('/', '');
+    // const onSearch = (e) => {
+    //     e.preventDefault();
+    //     const searchValue = e.target.value;
+    //     const valueWithoutSlash = searchValue.replace('/', '');
 
-        SetSearch(valueWithoutSlash);
-    }
+    //     SetSearch(valueWithoutSlash);
+    // }
 
     return (
 
@@ -93,7 +93,7 @@ const NavMain = () => {
                 </InputGroup>
 
                 <Flex align="center" display={['none','block']} >
-                    <Link href={user? "/api/auth/logout" : "/api/auth/login"}><Button as="a" variant='outline' colorScheme='teal'>{user ? "Logout" : "Login"}</Button></Link>
+                    <Link href={user? "/api/auth/logout" : "/api/auth/login"}><Button as="a" cursor="pointer" variant='outline' colorScheme='teal'>{user ? "Logout" : "Login"}</Button></Link>
                 </Flex>
 
 

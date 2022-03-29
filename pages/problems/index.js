@@ -2,10 +2,24 @@ import { Box, Flex, Heading, Text, Button, Container, Spinner } from '@chakra-ui
 import { useState } from 'react';
 import Layout from '../../components/Layout'
 import QuestionCard from '../../components/QuestionCard';
+import EmptySearch from '../../components/EmptySearch';
+import { withApollo } from '../../graphql/apollo'
+import { GET_CODE_QUESTIONS, GET_CODE_QUESTIONS_MUTATION } from '../../graphql/queries'
+import { useSubscription } from '@apollo/client'
+import { useSearch } from '../../utils/search';
 
 const problems = () => {
 
-    const [loading, setLoading] = useState(false)
+    const { data, loading, error } = useSubscription(GET_CODE_QUESTIONS_MUTATION)
+    const { search } = useSearch();
+
+    const allQuestions = data ? data.code_questions : []
+    const matchesSearch = (question) => question.question.toLowerCase().includes(search.toLowerCase());
+    // const matchesAlcoholType = (deal) => alcoholTypeFilters.includes(deal.alcoholType);
+    const filteredQuestions = allQuestions.filter(matchesSearch)
+    // .filter(matchesAlcoholType);
+
+    if (error) { console.log("Error MSg : ", error.message) }
 
 
     return (
@@ -16,7 +30,16 @@ const problems = () => {
                 </Flex>
             ) : (
                 <>
-                    <QuestionCard plaformName="HACKERRANK" question="Longest Substring Without Repeating Characters" />
+
+                    {filteredQuestions.length ? (
+                        filteredQuestions.map((question) => <QuestionCard answersCount={question.code_answers_aggregate.aggregate.count} userName={question.user.name} keyItem={question.id} platforms={question.platforms} question={question.question} />)
+                    )
+                        :
+                        (
+                            <EmptySearch resultName="" resultDetails="" />
+                        )
+                    }
+                    {/* <QuestionCard plaformName="HACKERRANK" question="Longest Substring Without Repeating Characters" /> */}
                     {/* {filteredDeals.length ? (
                         filteredDeals.map((deal) => <DealCard key={deal.id} userId={userId} {...deal} />)
                     ) : (
@@ -34,4 +57,4 @@ const problems = () => {
     )
 }
 
-export default problems
+export default withApollo(problems, { ssr: false })

@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import {
     useDisclosure,
     Modal,
@@ -16,46 +16,76 @@ import {
     Button,
     Checkbox,
     CheckboxGroup,
-    Stack
+    Stack,
+    useToast,
+
 } from '@chakra-ui/react';
-import {useForm} from 'react-hook-form';
-import {withAuthModal} from './AuthModal'
-import {useUser} from '@auth0/nextjs-auth0'
+import { useForm } from 'react-hook-form';
+import { withAuthModal } from '../components/AuthModal'
+import { useUser } from '@auth0/nextjs-auth0'
+import { useMutation } from '@apollo/client'
+import { INSET_CODE_QUESTION } from '../graphql/queries'
+import { withApollo } from '../graphql/apollo'
 
 
-const AddQuestionModal = ({openAuthModal}) => {
+const AddQuestionModal = ({ openAuthModal }) => {
     const initialRef = useRef();
-    const {isOpen, onOpen, onClose} = useDisclosure();
-    const {handleSubmit,formState:{errors}, register,reset} = useForm();
-
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { handleSubmit, formState: { errors }, register, reset } = useForm();
+    const toast = useToast()
     const [questionsType, setquestionsType] = useState([]);
 
-    const {user} = useUser()
+    const { user } = useUser()
 
 
     const onFiterQuestions = (newValues) => {
         setquestionsType(newValues);
     };
-
     const onOpenDealModal = () => {
         // if (!userId) {
         //     return openAuthModal();
         // }
-        if(!user) {
+        if (!user) {
             console.log("")
             return openAuthModal()
         }
-        
+
         onOpen();
-        
-
-        
     };
-
     const onCloseModal = () => {
         reset()
         onClose()
     }
+
+    const [AddQuestionMutation, AddQuestionMutationResult] = useMutation(INSET_CODE_QUESTION, { onCompleted: onCloseModal })
+
+    const onAddQuestion = (data) => {
+
+        if (questionsType.length === 0) {
+            toast({
+                title: 'Select atleast one platform',
+                status: 'error',
+                position: 'bottom',
+                isClosable: true
+
+            })
+        }
+        else {
+            AddQuestionMutation({
+                variables: {
+                    question: data.question,
+                    questionURL: data.questionURL,
+                    userID: '334343',
+                    platforms: []
+                }
+            })
+        }
+
+    }
+
+
+
+
 
 
     return (
@@ -64,16 +94,16 @@ const AddQuestionModal = ({openAuthModal}) => {
                 Ask Question
             </Button>
 
-            <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={() =>onCloseModal()} >
+            <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={() => onCloseModal()} >
                 <ModalOverlay />
                 <ModalContent borderRadius={4}>
                     <form
-                        onSubmit={handleSubmit((data) =>
-                            {
-                                console.log(data);
-                                console.log(questionsType)
-                                onCloseModal()
-                            }
+                        onSubmit={handleSubmit((data) => {
+                            onAddQuestion(data)
+                            // console.log(data);
+                            // console.log(questionsType)
+                            // onCloseModal()
+                        }
                             // onCreateDeal(
                             //     {
                             //         alcoholType,
@@ -96,7 +126,7 @@ const AddQuestionModal = ({openAuthModal}) => {
                                 <Input
                                     name="question"
                                     id="question"
-                                    {...register("question",{required:"Please Enter a question"})}
+                                    {...register("question", { required: "Please Enter a question" })}
                                     // ref={register("question",{
                                     //     required: 'Please enter a question.'
                                     // })}
@@ -109,7 +139,7 @@ const AddQuestionModal = ({openAuthModal}) => {
                                 <FormLabel>Question's URL</FormLabel>
                                 <Input
                                     name="questionURL"
-                                    {...register("questionURL",{required:"Please Enter a question URL"})}
+                                    {...register("questionURL", { required: "Please Enter a question URL" })}
                                     // ref={register({
                                     //     required: 'Please enter a question.'
                                     // })}
@@ -135,14 +165,14 @@ const AddQuestionModal = ({openAuthModal}) => {
                                     </CheckboxGroup>
                                 </Stack>
                             </FormControl>
-                            
-                          
-                            
+
+
+
                         </ModalBody>
 
                         <ModalFooter>
                             <Button onClick={() => onCloseModal()}>Cancel</Button>
-                            <Button  type="submit" colorScheme="teal" ml={3}>
+                            <Button isLoading={AddQuestionMutationResult.loading} type="submit" colorScheme="teal" ml={3}>
                                 Ask
                             </Button>
                         </ModalFooter>
@@ -151,7 +181,7 @@ const AddQuestionModal = ({openAuthModal}) => {
             </Modal>
         </>
     );
-  
+
 }
 
-export default withAuthModal(AddQuestionModal)
+export default withApollo(withAuthModal(AddQuestionModal), { ssr: false })
