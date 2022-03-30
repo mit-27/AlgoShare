@@ -36,9 +36,10 @@ const CodeCard = ({language,code,user,votes,score,answerID}) => {
                 <Voter votes={votes} answerID={answerID} score={score}  />
                 <Stack ml={3} mt={2} mb={2} w="100%" pr={4}>
                     <Flex align="center" justify="space-between">
-                        <Text fontSize="xl" cursor='pointer' fontWeight="semibold" lineHeight="short">
+                    <Badge cursor='default' fontSize='md' variant='subtle'>{language}</Badge>
+                        {/* <Text fontSize="xl" cursor='pointer' fontWeight="semibold" lineHeight="short">
                             Programming Language : {language}
-                        </Text>
+                        </Text> */}
                         
                     </Flex>
                     <Flex align='baseline'>
