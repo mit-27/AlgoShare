@@ -1,4 +1,4 @@
-import {Box,Flex,Icon,Stack,Text,CloseButton,Spacer} from '@chakra-ui/react'
+import {Box,Flex,Icon,Stack,Text,CloseButton,Spacer,Button} from '@chakra-ui/react'
 import {MdHomeFilled,MdImportContacts} from 'react-icons/md'
 import Link from 'next/link'
 import {ComponentLink} from './NavLink';
@@ -44,18 +44,20 @@ const SideNav = ({display,width,maxWidth,closedrawer}) => {
           
             // {...props}
         >
-           <Flex w='full' justify='flex-end' display={['block','none']}>
-              <Spacer/>
-              <Box>
-              <CloseButton alignSelf='flex-end' colorScheme='blue'  onClick={closedrawer} size='md'/>
-
-              </Box>
-            </Flex>
+           
             <Box top="4rem" position="relative" overflowY="auto" borderRightWidth="1px">
                 <Box>
                    
                     <Flex justify="space-between" direction="column" height="calc(100vh - 4rem)" fontSize="sm" p="6">
+                    {/* <Flex  justify='flex-end'  display={['block','none']}> */}
+                      {/* <Spacer/> */}
+                      {/* <Box> */}
+                      <Button  display={['block','none']}  colorScheme='blue'  onClick={closedrawer} size='md'>Close</Button>
+
+                      {/* </Box> */}
+                    {/* </Flex> */}
                         {/* <PageLinks /> */}
+                        
                         <Filters/>
                         <AddQuestionModal/>
 

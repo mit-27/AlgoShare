@@ -2,7 +2,8 @@ import { ChakraProvider, ColorModeProvider, CSSReset, ThemeProvider, extendTheme
 import { UserProvider } from '@auth0/nextjs-auth0';
 import '../styles/Home.css'
 import { ProvideSearch } from '../utils/search'
-
+import { DefaultSeo } from 'next-seo';
+import seo from '../seo.config';
 
 const Mytheme = extendTheme({
   config: {
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
     <UserProvider>
       <ChakraProvider theme={Mytheme}>
         <ProvideSearch>
+          <DefaultSeo {...seo} />
           <Component {...pageProps} />
         </ProvideSearch>
       </ChakraProvider>

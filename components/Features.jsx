@@ -15,7 +15,7 @@ const Features = () => {
                     <VStack  px={5} py={8} alignItems='flex-start' textAlign='left'>
                         <Icon  w={8}  color='white' h={8} as={IoIosChatbubbles}/>
                         <Text  fontSize="md" mt="6">
-                        Create a community to help each other with coding problems. Add solution for asked coding question and also ask your doubts related to it.
+                        Create a community to help each other with coding problems. Add solution for asked coding question.
                         </Text>
                     </VStack>
                 </GridItem>

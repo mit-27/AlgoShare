@@ -9,11 +9,14 @@ import { useSubscription } from '@apollo/client'
 import { useSearch } from '../../utils/search';
 
 const problems = () => {
+    const [loading, setLoading] = useState(true)
 
-    const { data, loading, error } = useSubscription(GET_CODE_QUESTIONS_SUBSCRIPTION)
+    // const { data, loading, error } = useSubscription(GET_CODE_QUESTIONS_SUBSCRIPTION)
     const { search, platformFilters } = useSearch();
 
-    const allQuestions = data ? data.code_questions : []
+    // const allQuestions = data ? data.code_questions : []
+    const allQuestions = []
+
     const matchesSearch = (question) => question.question.toLowerCase().includes(search.toLowerCase());
     const matchesPlatform = (question) => question.platforms.some(p => platformFilters.includes(p));
 
@@ -21,7 +24,7 @@ const problems = () => {
     const filteredQuestions = allQuestions.filter(matchesSearch).filter(matchesPlatform)
     // .filter(matchesAlcoholType);
 
-    if (error) { console.log("Error MSg : ", error.message) }
+    // if (error) { console.log("Error MSg : ", error.message) }
 
 
     return (

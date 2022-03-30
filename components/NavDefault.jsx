@@ -28,7 +28,7 @@ const NavDefault = () => {
         <Box width="full" mx="auto" px={6} pr={[1, 6]} height="100%">
             <Flex size="100%" p={[2, 3]} pl={[0, 4]} align="center" justify="space-between">
                 <Box as="a"  d="block" href="/" aria-label="Algoshare, Back to homepage">
-                    <Heading  size='md' color='skyblue'>AlgoShare</Heading>
+                    <Heading  size='md' color='teal.200'>{'{AlgoShare}'}</Heading>
                 </Box>
                 <Flex align="center" display={['none','block']} >
                     <Link href={user? "/api/auth/logout" : "/api/auth/login"} passHref > 
