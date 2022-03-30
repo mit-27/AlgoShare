@@ -1,12 +1,4 @@
-/* eslint react/prop-types: 0 */
-
-
 import { Box, Flex, Heading, Text, Button, Container, Spinner } from '@chakra-ui/react';
-<<<<<<< HEAD
-// import { useState } from 'react';
-=======
-import React, { useState } from 'react';
->>>>>>> 0fdecae7565cb925b407974690189dd55c0c55c9
 import Layout from '../../components/Layout'
 import QuestionCard from '../../components/QuestionCard';
 import EmptySearch from '../../components/EmptySearch';
