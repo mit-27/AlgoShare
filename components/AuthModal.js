@@ -32,6 +32,3 @@ export const withAuthModal = (Component) => (props) => {
     );
 };
 
-
-
-// export default withAuthModal
