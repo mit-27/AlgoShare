@@ -135,7 +135,7 @@ const AddQuestionModal = ({ openAuthModal }) => {
                             </FormControl>
 
                             <FormControl mt={4} isInvalid={errors.questionURL && errors.questionURL.message}>
-                                <FormLabel>Question's URL</FormLabel>
+                                <FormLabel>{"Question's URL"}</FormLabel>
                                 <Input
                                     name="questionURL"
                                     {...register("questionURL", { required: "Please Enter a question URL" })}

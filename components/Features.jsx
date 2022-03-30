@@ -19,7 +19,7 @@ const Features = () => {
                         </Text>
                     </VStack>
                 </GridItem>
-                <GridItem py={5} colSpan='1' alignSelf='center' mx='auto' maxW='250' minH='300' _hover = { { transform: "scale(1.1)",transition:'all .3s ease-in-out' } } colSpan='1' bgColor='purple.500' borderRadius='md'>
+                <GridItem py={5} colSpan='1' alignSelf='center' mx='auto' maxW='250' minH='300' _hover = { { transform: "scale(1.1)",transition:'all .3s ease-in-out' } } bgColor='purple.500' borderRadius='md'>
                     <VStack p={7} alignItems='flex-start' textAlign='left'>
                         <Icon  w={8}  color='white' h={8} as={FaShareSquare}/>
                         <Text  fontSize="md" mt="6">
@@ -27,7 +27,7 @@ const Features = () => {
                         </Text>
                     </VStack>
                 </GridItem>
-                <GridItem py={5} colSpan='1' alignSelf='center' mx='auto' maxW='250' minH='300' _hover = { { transform: "scale(1.1)",transition:'all .3s ease-in-out' } } colSpan='1' bgColor='pink.400' borderRadius='md'>
+                <GridItem py={5} colSpan='1' alignSelf='center' mx='auto' maxW='250' minH='300' _hover = { { transform: "scale(1.1)",transition:'all .3s ease-in-out' } }  bgColor='pink.400' borderRadius='md'>
                     <VStack p={7} alignItems='flex-start' textAlign='left'>
                         <Icon  w={8}  color='white' h={8} as={MdManageSearch}/>
                         <Text  fontSize="md" mt="6">

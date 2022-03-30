@@ -1,3 +1,4 @@
+import React from 'react'
 import { Modal, ModalBody, ModalOverlay, ModalContent, Flex, useDisclosure, Button, Text, ModalCloseButton, Stack, ModalHeader } from '@chakra-ui/react'
 import Link from 'next/link'
 

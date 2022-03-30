@@ -1,7 +1,7 @@
 import {Box,Flex,Icon,Stack,Text,CloseButton,Spacer,Button} from '@chakra-ui/react'
 import {MdHomeFilled,MdImportContacts} from 'react-icons/md'
 import Link from 'next/link'
-import {ComponentLink} from './NavLink';
+// import {ComponentLink} from './NavLink';
 import Filters from './Filters';
 import AddQuestionModal from './AddQuestionModal'
 
