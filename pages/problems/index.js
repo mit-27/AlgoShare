@@ -36,7 +36,7 @@ const problems = () => {
                 <>
 
                     {filteredQuestions.length ? (
-                        filteredQuestions.map((question) => <QuestionCard answersCount={question.code_answers_aggregate.aggregate.count} userName={question.user.name} key={question.id} platforms={question.platforms} question={question.question} />)
+                        filteredQuestions.map((question) => <QuestionCard answersCount={question.code_answers_aggregate.aggregate.count} userName={question.user.name} keyItem={question.id} platforms={question.platforms} question={question.question} />)
                     )
                         :
                         (
