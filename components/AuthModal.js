@@ -1,8 +1,11 @@
+
 import React from 'react'
 import { Modal, ModalBody, ModalOverlay, ModalContent, Flex, useDisclosure, Button, Text, ModalCloseButton, Stack, ModalHeader } from '@chakra-ui/react'
 import Link from 'next/link'
 
 export const withAuthModal = (Component) => (props) => {
+
+
     const { isOpen, onOpen, onClose } = useDisclosure();
 
 
@@ -29,4 +32,6 @@ export const withAuthModal = (Component) => (props) => {
     );
 };
 
-export default withAuthModal
+
+
+// export default withAuthModal

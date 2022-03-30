@@ -1,3 +1,5 @@
+/* eslint react/prop-types: 0 */
+
 import {Box, Flex, Heading, Text, Button,IconButton,Menu,MenuList,MenuItem,MenuButton,Input,InputGroup,InputLeftElement,Icon,Drawer,DrawerBody,DrawerOverlay, DrawerContent,useDisclosure,DrawerCloseButton} from '@chakra-ui/react';
 import Link from 'next/link'
 import {HamburgerIcon} from '@chakra-ui/icons'
