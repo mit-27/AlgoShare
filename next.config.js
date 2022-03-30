@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // reactStrictMode: false,
   env: {
     HASURA_SECRET: process.env.HASURA_SECRET,
     HASURA_HTTP_URL: process.env.HASURA_HTTP_URL,

@@ -1,5 +1,8 @@
+/* eslint react/prop-types: 0 */
+
+
 import { Box, Flex, Heading, Text, Button, Container, Spinner } from '@chakra-ui/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Layout from '../../components/Layout'
 import QuestionCard from '../../components/QuestionCard';
 import EmptySearch from '../../components/EmptySearch';
@@ -37,7 +40,7 @@ const problems = () => {
                 <>
 
                     {filteredQuestions.length ? (
-                        filteredQuestions.map((question) => <QuestionCard answersCount={question.code_answers_aggregate.aggregate.count} userName={question.user.name} keyItem={question.id} platforms={question.platforms} question={question.question} />)
+                        filteredQuestions.map((question) => <QuestionCard answersCount={question.code_answers_aggregate.aggregate.count} userName={question.user.name} key={question.id} platforms={question.platforms} question={question.question} />)
                     )
                         :
                         (

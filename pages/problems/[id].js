@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import React from 'react'
 import { useRouter } from 'next/router'
 import NavDefault from '../../components/NavDefault'
