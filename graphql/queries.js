@@ -1,5 +1,30 @@
 import { gql } from '@apollo/client'
 
+
+export const INSERT_VOTE_MUTATION = gql`
+mutation MyMutation($codeAnswerID:uuid!,$upvoted:Boolean!,$userID:String!) {
+  insert_Votes(objects: {codeAnswerID: $codeAnswerID, upvoted: $upvoted, userID: $userID}) {
+    returning {
+      id
+    }
+  }
+}
+`;
+
+export const UPDATE_VOTE_MUTATION = gql`
+mutation MyMutation($codeAnswerID:uuid!,$upvoted:Boolean!,$userID:String!) {
+  update_Votes(where: {codeAnswerID: {_eq: $codeAnswerID}, userID: {_eq: $userID}}, _set: {upvoted: $upvoted}) {
+    returning {
+      id
+      upvoted
+      userID
+    }
+  }
+}
+`;
+
+
+
 export const INSET_CODE_QUESTION = gql`
 mutation MyMutation($question:String!,$questionURL:String!,$userID:String!,$platforms:jsonb) {
     insert_code_questions(objects: {platforms: $platforms, question: $question, questionURL: $questionURL, userID: $userID}) {
@@ -35,6 +60,11 @@ subscription Mysubscription($questionID:uuid!) {
         upvoted
         userID
       }
+      language
+      user {
+        name
+        id
+      }
     }
     user {
       name
@@ -61,3 +91,12 @@ subscription MySubscription {
   }
 }
 `;
+
+
+export const ADD_CODE_ANSWER_MUTATION = gql`
+mutation MyMutation($codeAnswer:String!,$language:String!,$questionID:uuid!,$userID:String!) {
+  insert_code_answers_one(object: {codeAnswer: $codeAnswer, language: $language, questionID: $questionID, userID: $userID}) {
+    id
+  }
+}
+`

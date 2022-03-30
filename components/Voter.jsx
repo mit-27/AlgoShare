@@ -4,12 +4,20 @@ import { useState } from 'react'
 import {Box,Stack,IconButton} from '@chakra-ui/react'
 import { useUser } from '@auth0/nextjs-auth0'
 import { withAuthModal } from './AuthModal'
+import {useMutation} from '@apollo/client'
+import {INSERT_VOTE_MUTATION,UPDATE_VOTE_MUTATION} from '../graphql/queries'
 
-const Voter = ({openAuthModal}) => {
+const Voter = ({openAuthModal,votes,answerID,score}) => {
 
-    const [upvoted,setUpvote] = useState(false)
-    const [downvoted,setDownvote] = useState(false)
     const {user} = useUser()
+
+    const currentUserVotedDeal = votes.find((voted) => voted.userID === user?.sub);
+    const upvoted = currentUserVotedDeal && currentUserVotedDeal.upvoted;
+    const downvoted = currentUserVotedDeal && !currentUserVotedDeal.upvoted;
+
+    const [updateVote] = useMutation(UPDATE_VOTE_MUTATION);
+    const [insertVote] = useMutation(INSERT_VOTE_MUTATION);
+    
 
     const onVote = (vote) => {
 
@@ -17,8 +25,29 @@ const Voter = ({openAuthModal}) => {
         return openAuthModal()
       }
 
-      setUpvote(vote)
-      setDownvote(!vote)
+      if(currentUserVotedDeal)
+      {
+        return updateVote({
+          variables: {
+            codeAnswerID:answerID,
+            upvoted:vote,
+            userID:user.sub
+          }
+        })
+      }
+      else
+      {
+        return insertVote({
+          variables:{
+            codeAnswerID:answerID,
+            upvoted:vote,
+            userID:user.sub
+          }
+        })
+      }
+
+      // setUpvote(vote)
+      // setDownvote(!vote)
     }
 
 
@@ -36,7 +65,7 @@ const Voter = ({openAuthModal}) => {
                       variant={upvoted ? 'solid' : 'ghost'}
                       color="gray.500"
                   />
-                  <Box fontWeight="semibold">20</Box>
+                  <Box fontWeight="semibold">{score}</Box>
                   <IconButton
                       aria-label="Downvote"
                       icon={<ChevronDownIcon/>}

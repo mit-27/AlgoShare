@@ -11,11 +11,12 @@ import Voter from './Voter';
 
 
 
-const languagesObjects = {'java':java(),'python':python()}
+const languagesObjects = { 'java': java(), 'python': python(), 'cpp': cpp(), 'javascript': javascript({ jsx: 'false' }) }
 
 
 
-const CodeCard = ({language,code}) => {
+
+const CodeCard = ({language,code,user,votes,score,answerID}) => {
 
     const router = useRouter()
     const [CurrentCOde,setCurrentCode] = useState(code)
@@ -32,7 +33,7 @@ const CodeCard = ({language,code}) => {
             backgroundColor="gray.800"
         >
             <Flex>
-                <Voter/>
+                <Voter votes={votes} answerID={answerID} score={score}  />
                 <Stack ml={3} mt={2} mb={2} w="100%" pr={4}>
                     <Flex align="center" justify="space-between">
                         <Text fontSize="xl" cursor='pointer' fontWeight="semibold" lineHeight="short">
@@ -47,7 +48,7 @@ const CodeCard = ({language,code}) => {
                         theme={oneDark}
                         
                         className='codemirror'
-                        // editable={false}
+                        editable={false}
                         extensions={[languagesObjects[language]]}
                         onChange={(value, viewUpdate) => {
                             setCurrentCode(value)
@@ -59,7 +60,7 @@ const CodeCard = ({language,code}) => {
                     
 
                     <Flex align='baseline' justify='flex-end'>
-                        <Badge cursor='default' fontSize='sm' variant='subtle'> - Mit Suthar</Badge>
+                        <Badge cursor='default' fontSize='sm' variant='subtle'> - {user.name}</Badge>
                     </Flex>
                 </Stack>
             </Flex>

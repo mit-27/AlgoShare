@@ -4,22 +4,15 @@ import NavDefault from '../../components/NavDefault'
 import { Box, Heading, Flex, Badge, VStack, Stack, Center, useToast, Button, Select, FormLabel, Text, Link, Spinner } from '@chakra-ui/react'
 import { useState } from 'react'
 import CodeCard from '../../components/CodeCard'
-import CodeMirror from '@uiw/react-codemirror';
-import { oneDark } from '@codemirror/theme-one-dark';
-import { python } from '@codemirror/lang-python'
-import { cpp } from '@codemirror/lang-cpp'
-import { java } from '@codemirror/lang-java'
-import { javascript } from '@codemirror/lang-javascript'
 import { useUser } from '@auth0/nextjs-auth0'
-import { withAuthModal } from '../../components/AuthModal'
 import EmptySearch from '../../components/EmptySearch';
+import CodeForm from '../../components/CodeForm'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { withApollo } from '../../graphql/apollo'
 import { useSubscription } from '@apollo/client'
 import { GET_ONE_CODE_QUESTION_SUBSCRIPTION } from '../../graphql/queries'
+import { calculateScoreAndSortDesc } from '../../utils/answers'
 
-
-const languagesObjects = { 'java': java(), 'python': python(), 'cpp': cpp(), 'javascript': javascript({ jsx: 'false' }) }
 
 const badgeColors = {
     LEETCODE: 'yellow',
@@ -40,7 +33,9 @@ const ProblemAnswers = ({ openAuthModal }) => {
 
     const { data, loading, error } = useSubscription(GET_ONE_CODE_QUESTION_SUBSCRIPTION, { variables: { questionID: router.query.id } })
 
-    const Question = data ? data.code_questions_by_pk : ""
+    const Question = data ? { ...data.code_questions_by_pk, code_answers: calculateScoreAndSortDesc(data.code_questions_by_pk.code_answers) } : ""
+
+    // const CodeAnswers = data ? data.code_questions_by_pk.code_answers : []
 
     if (error) {
         console.log("Error Message : ", error.message)
@@ -54,20 +49,7 @@ const ProblemAnswers = ({ openAuthModal }) => {
 
 
 
-    const onAdd = () => {
 
-        if (!user) {
-            return openAuthModal()
-        }
-
-        if (code === "" || language === "") {
-            toast({
-                title: 'Select language',
-                status: 'error',
-                position: 'bottom'
-            })
-        }
-    }
 
 
     return (
@@ -88,7 +70,7 @@ const ProblemAnswers = ({ openAuthModal }) => {
 
                                     <Heading>
 
-                                        <Link size='xl' href={Question.questionURL} isExternal color='teal.200'>{Question.question}<ExternalLinkIcon mx='2px' /></Link>
+                                        <Link size='xl' mr={2} href={Question.questionURL} isExternal color='teal.200'>{Question.question}  <ExternalLinkIcon mx='2px' /></Link>
 
                                     </Heading>
                                     <Flex align='baseline' justify='flex-start'>
@@ -112,7 +94,7 @@ const ProblemAnswers = ({ openAuthModal }) => {
 
                             <Box width="full" maxWidth="1280px" mx="auto" px={6} py={6}>
                                 {Question.code_answers.length ? (
-                                    Question.code_answers.map((codeAnswer) => <CodeCard code={codeAnswer.codeAnswer} language={codeAnswer.language} />)
+                                    Question.code_answers.map((codeAnswer) => <CodeCard key={codeAnswer.id} answerID={codeAnswer.id} code={codeAnswer.codeAnswer} votes={codeAnswer.Votes} score={codeAnswer.score} language={codeAnswer.language} user={codeAnswer.user} />)
                                 )
                                     :
                                     (
@@ -128,42 +110,9 @@ const ProblemAnswers = ({ openAuthModal }) => {
 
                             </Box>
 
-                            <Center>
-                                <Stack spacing={3} px={5} width="full" maxWidth="1280px" alignSelf='center' borderTopWidth='medium' pt={20} pb={5}>
-                                    <Box
-                                        borderWidth="1px"
-                                        borderRadius={8}
-                                        p={5}
-                                        mb={3}
-                                        backgroundColor="gray.800"
-                                    >
+                            <CodeForm questionID={Question.id} />
 
-                                        <Heading my={3} size='xl' >Add your answer</Heading>
-                                        <FormLabel my={2} >Select the Programming Language</FormLabel>
-                                        <Select my={3} defaultValue={language} onChange={(e) => setLanguage(e.target.value)} >
-                                            <option value='java'>JAVA</option>
-                                            <option value='python'>Python</option>
-                                            <option value='cpp'>C++</option>
-                                            <option value='javascript'>JavaScript</option>
 
-                                        </Select>
-                                        <FormLabel my={2} >Enter your code below</FormLabel>
-                                        <CodeMirror
-                                            value={code}
-                                            theme={oneDark}
-                                            height="300px"
-                                            className='codemirror'
-                                            // editable={false}
-                                            extensions={[languagesObjects[language]]}
-                                            onChange={(value, viewUpdate) => {
-                                                setCode(value)
-                                            }}
-                                        />
-                                        <Button my={3} ml={3} mt={8} size='lg' onClick={() => onAdd()} colorScheme='cyan'>Add</Button>
-
-                                    </Box>
-                                </Stack>
-                            </Center>
 
                         </Box>
                     </Box>
@@ -173,4 +122,4 @@ const ProblemAnswers = ({ openAuthModal }) => {
     )
 }
 
-export default withApollo(withAuthModal(ProblemAnswers), { ssr: false })
+export default withApollo(ProblemAnswers, { ssr: false })
