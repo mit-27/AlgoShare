@@ -16,11 +16,11 @@ export const withAuthModal = (Component) => (props) => {
                 <ModalOverlay />
                 <ModalContent borderRadius={4}>
                     <ModalCloseButton />
-                    <ModalHeader>Authenticate</ModalHeader>
+                    <ModalHeader>Login</ModalHeader>
                     <ModalBody p={5}>
                         <Flex align="center" justify="center">
                             <Stack spacing={3}>
-                                <Text>You cannot access this feature without login. </Text>
+                                <Text>Please login first.You cannot access this feature without login. </Text>
                                 <Link passHref href='/api/auth/login' ><Button as='a' colorScheme='teal'>Login</Button></Link>
                             </Stack>
                         </Flex>

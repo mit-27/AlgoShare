@@ -16,7 +16,7 @@ const Filters = () => {
     
     <Box>
         <Stack spacing={3} mb={8} >
-            <Link href="https://github.com/mit-27/Algorithms" isExternal ><Icon as={FaGithub} w='full' h={7} /></Link>
+            {/* <Link href="https://github.com/mit-27/Algorithms" isExternal ><Icon as={FaGithub} w='full' h={7} /></Link> */}
             {/* <Button as='a' href='https://github.com/mit-27/Algorithms'   colorScheme="gray.200" leftIcon={<FaGithub/>}  mb={4} variant='outline'>Github Repo</Button> */}
             <Text mb={2} fontWeight="bold">
                 {'Filter Platform specific Questions'}
