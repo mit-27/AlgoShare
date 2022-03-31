@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Introduction
 
-## Getting Started
+AlgoShare which means sharing algorithms of coding problems. It is an open-source and MIT license website. It is a platform to ask and answer different coding questions. Users can post Coding questions and others can answer via submitting their code. Also, users can filter questions based on platforms and by using search.
 
-First, run the development server:
+# Features
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Landing Page
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![homepage.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648665524787/tCmhSMqxR.png)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+This is a home/landing page or you could say about page. On this page, the introduction of the platform is mentioned. Apart from this, what features it offers are also written. Users can navigate to problems by clicking on the problem button which presents in the navigation bar. They can also log in by clicking on the login button.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Add a coding question with platforms
 
-## Learn More
+![Ask_question.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648664679807/E1-7uK-na.png)
 
-To learn more about Next.js, take a look at the following resources:
+Users can click on add question button. After clicking, this modal will pop up in which the user can type a question, the question's link, and also choose on which platform this question is available. After adding this information, the user has to just click on add button.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Filter coding questions based on platforms and search 
 
-## Deploy on Vercel
+![Platforms_Filters.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648665296814/q1NHJFZZ9.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+I guess it is an important feature to filter out questions based on the platforms they present. There are many users who just practice from only one single platform and that is why this feature will help them out.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Using_Search.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648665308314/dKWl0kWZs.png)
+
+It is very common and helpful to the search questions. Because of that, I added a search bar on top so that users can easily search their questions and find out whether the question is available on the platform or not.
+
+
+## Code Form to submit problem's solution in different programming languages
+
+![codeForm.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648665487288/mzZy8ZW2b.png)
+
+To answer and provide solutions to the coding questions, this code form is used. When users click on questions from the problem page, it will redirect to the answers page where they can see all submitted solutions for only that particular question. Also, after all, solutions, there is a code form. Users have to select a programming language and add code in the editor then click on add button.
+
+## Vote on submitted answers
+
+![answers.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648665426817/DBAdAqBwt.png)
+
+Like StackOverflow, here users can also upvote submitted coding solutions for specific questions. The order in which solutions are displayed will be based on upvotes. The solution which has higher votes will be displayed first and vise versa.
+
+## Authentication to add and answer coding problems
+
+![protected_feature.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648665191864/41_VD9DYv.png)
+
+Apart from the filter feature, users have to log in to access the above features. In modern applications, authentication and authorization will play an important role. If users want to ask questions or answer the coding question, then first they have to log in with their email address. If they didn't log in and try to access the feature then the above pop-up will appear on the screen.
+
+![auth.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648665210759/LDjOJGgzr.png)
+
+For authentication, I have used Auth0 which is very compatible with Hasura and also much easier to set up with nextjs. After authentication, Auth0 will add users to the PostgreSQL database users table.
+
+# Tech Stack
+
+- [Chakra-UI](https://chakra-ui.com/) for UI
+- [Next JS](https://nextjs.org/) to build website
+- [Hasura](https://hasura.io/) to manage backend
+- [Auth0](https://auth0.com/? utm_content=homepage&utm_source=google&utm_medium=cpc&utm_term=auth0&utm_campaign=emea-isr-search-branded&utm_id=go_cmp-15319820779_adg-129493273629_ad-563063125621_kwd-331982174580_dev-c_ext-_prd-_mca-_sig-CjwKCAjwopWSBhB6EiwAjxmqDco2Zbbl82PnipOJmh8F2f84BqrFx6LX17FZ4MCY9_qalj7gx1AIOhoC2wgQAvD_BwE&gclid=CjwKCAjwopWSBhB6EiwAjxmqDco2Zbbl82PnipOJmh8F2f84BqrFx6LX17FZ4MCY9_qalj7gx1AIOhoC2wgQAvD_BwE) for Authentication
+- [PostgreSQL from Heroku](https://www.heroku.com/postgres) for database
+- [Apollo GraphQL](https://www.apollographql.com/) to fetch data using graphQL queries
+- [Vercel](https://vercel.com/) to host a website
+
+# How to setup the project
+- First clone this repo.
+- Create Hasura project and setup database using this [link](https://hasura.io/learn/graphql/nextjs-fullstack-serverless/hasura-backend/) and also setup Auth0 with this [link](https://hasura.io/learn/graphql/hasura/authentication/1-create-auth0-app/)
+- Create `.env` file and enter below variables with values
+  ```
+  HASURA_SECRET=
+  HASURA_HTTP_URL=
+  HASURA_WSS_URL=
+  AUTH0_SECRET=
+  AUTH0_BASE_URL=
+  AUTH0_ISSUER_BASE_URL=
+  AUTH0_CLIENT_ID=
+  AUTH0_CLIENT_SECRET=
+  ```
+ - Now, enjoy the project
