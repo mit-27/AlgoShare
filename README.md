@@ -56,7 +56,7 @@ For authentication, I have used Auth0 which is very compatible with Hasura and a
 - [Chakra-UI](https://chakra-ui.com/) for UI
 - [Next JS](https://nextjs.org/) to build website
 - [Hasura](https://hasura.io/) to manage backend
-- [Auth0](https://auth0.com/? utm_content=homepage&utm_source=google&utm_medium=cpc&utm_term=auth0&utm_campaign=emea-isr-search-branded&utm_id=go_cmp-15319820779_adg-129493273629_ad-563063125621_kwd-331982174580_dev-c_ext-_prd-_mca-_sig-CjwKCAjwopWSBhB6EiwAjxmqDco2Zbbl82PnipOJmh8F2f84BqrFx6LX17FZ4MCY9_qalj7gx1AIOhoC2wgQAvD_BwE&gclid=CjwKCAjwopWSBhB6EiwAjxmqDco2Zbbl82PnipOJmh8F2f84BqrFx6LX17FZ4MCY9_qalj7gx1AIOhoC2wgQAvD_BwE) for Authentication
+- [Auth0](https://auth0.com/) for Authentication
 - [PostgreSQL from Heroku](https://www.heroku.com/postgres) for database
 - [Apollo GraphQL](https://www.apollographql.com/) to fetch data using graphQL queries
 - [Vercel](https://vercel.com/) to host a website
