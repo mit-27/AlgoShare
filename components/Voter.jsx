@@ -27,6 +27,10 @@ const Voter = ({openAuthModal,votes,answerID,score}) => {
 
       if(currentUserVotedDeal)
       {
+        console.log(answerID)
+        console.log(vote)
+        console.log(user.sub)
+
         return updateVote({
           variables: {
             codeAnswerID:answerID,
@@ -37,6 +41,9 @@ const Voter = ({openAuthModal,votes,answerID,score}) => {
       }
       else
       {
+        console.log(answerID)
+        console.log(vote)
+        console.log(user.sub)
         return insertVote({
           variables:{
             codeAnswerID:answerID,

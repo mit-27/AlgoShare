@@ -4,12 +4,12 @@ import { handleAuth, handleLogin, handleLogout } from '@auth0/nextjs-auth0';
 export default handleAuth({
     async login(req, res) {
         await handleLogin(req, res, {
-            returnTo: "https://algo-share.vercel.app/problems",
+            returnTo: "http://localhost:3000/problems",
         });
     },
     async logout(req, res) {
         await handleLogout(req, res, {
-            returnTo: "https://algo-share.vercel.app/problems"
+            returnTo: "http://localhost:3000/problems"
         })
     }
 });

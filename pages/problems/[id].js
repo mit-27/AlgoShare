@@ -95,7 +95,7 @@ const ProblemAnswers = ({ openAuthModal }) => {
 
                             <Box width="full" maxWidth="1280px" mx="auto" px={6} py={6}>
                                 {Question.code_answers.length ? (
-                                    Question.code_answers.map((codeAnswer) => <CodeCard key={codeAnswer.id} answerID={codeAnswer.id} code={codeAnswer.codeAnswer} votes={codeAnswer.Votes} score={codeAnswer.score} language={codeAnswer.language} user={codeAnswer.user} />)
+                                    Question.code_answers.map((codeAnswer) => <CodeCard key={codeAnswer.id} answerID={codeAnswer.id} code={codeAnswer.codeAnswer} votes={codeAnswer.votes} score={codeAnswer.score} language={codeAnswer.language} user={codeAnswer.user} />)
                                 )
                                     :
                                     (

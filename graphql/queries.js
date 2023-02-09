@@ -49,13 +49,13 @@ export const GET_ONE_CODE_QUESTION_SUBSCRIPTION = gql`
 subscription Mysubscription($questionID:uuid!) {
   code_questions_by_pk(id: $questionID) {
     id
-    platforms
     question
+    platforms
     questionURL
     code_answers {
       codeAnswer
       id
-      Votes {
+      votes {
         id
         upvoted
         userID
